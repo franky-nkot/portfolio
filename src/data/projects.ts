@@ -40,6 +40,7 @@ export const projects: Project[] = [
       "CV et lettres de motivation générés pour plusieurs offres et profils. Analyse les offres, restructure les documents pour maximiser le taux de correspondance recruteur. SaaS freemium avec scoring intelligent et export multi-format.",
     ],
     stack: ['Mistral AI', 'React', 'Django', 'Supabase', 'Vite'],
+    link: { url: 'https://github.com/franky-nkot/cv-adapter', label: 'GitHub' },
   },
   {
     no: '03',
@@ -55,6 +56,7 @@ export const projects: Project[] = [
       "du temps de reporting supprimé. Workflow n8n de 18 nœuds : collecte multi-sources, classification LLM via Groq, alertes Telegram automatiques, dashboard Google Sheets. Score officiel 4,40/5 au n8n Community Challenge. Coût : 0,002€ par exécution.",
     ],
     stack: ['n8n', 'Groq', 'Llama 3.3', 'Google Sheets', 'Telegram'],
+    link: { url: 'https://github.com/franky-nkot/n8n-workflows', label: 'GitHub' },
   },
   {
     no: '04',
@@ -70,6 +72,7 @@ export const projects: Project[] = [
       "outils orchestrés. Bot Telegram conversationnel pour cabinet dentaire : agent IA avec mémoire, CRUD Google Calendar, confirmations email, vérification de disponibilité en temps réel, gestion multi-scénarios (réserver, modifier, annuler).",
     ],
     stack: ['n8n', 'Groq', 'Llama 4 Scout', 'Telegram', 'Google Calendar'],
+    link: { url: 'https://github.com/franky-nkot/n8n-workflows', label: 'GitHub' },
   },
   {
     no: '05',
@@ -85,6 +88,7 @@ export const projects: Project[] = [
       "catégories gérées. Webhook trigger → Mistral Large classifie et rédige une réponse contextuelle. Catégories : setup, sécurité, pricing, escalade, RH, spam. Parser JSON avec fallback regex. Score officiel : 4,40/5 au n8n Community Challenge.",
     ],
     stack: ['n8n', 'Mistral Large', 'Webhook'],
+    link: { url: 'https://github.com/franky-nkot/n8n-workflows', label: 'GitHub' },
   },
   {
     no: '06',
@@ -100,5 +104,6 @@ export const projects: Project[] = [
       "diffusions par jour. Tourne à 6h et 19h. Scrape BBC World RSS, filtre par mots-clés géopolitiques (Iran, guerre, Trump, Chine, Israël, conflit, gaz, US), résume en français via Groq Llama 3.3-70b, envoie sur un canal Telegram.",
     ],
     stack: ['n8n', 'Groq', 'Llama 3.3', 'BBC RSS', 'Telegram'],
+    link: { url: 'https://github.com/franky-nkot/n8n-workflows', label: 'GitHub' },
   },
 ];
