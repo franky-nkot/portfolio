@@ -59,9 +59,21 @@ export function Work() {
                 >
                   <div className="grid grid-cols-12 gap-6 pb-8">
                     <div className={`col-start-2 col-span-2 h-24 rounded-lg ${p.color}`} />
-                    <p className={`col-span-12 text-sm leading-6 md:col-span-4 ${muted}`}>
-                      {p[langKey][1]}
-                    </p>
+                    <div className="col-span-12 md:col-span-4">
+                      <p className={`text-sm leading-6 ${muted}`}>
+                        {p[langKey][1]}
+                      </p>
+                      {p.link && (
+                        <a
+                          href={p.link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`mt-4 inline-block rounded-full border px-4 py-2 font-mono text-[10px] tracking-[.12em] transition hover:opacity-70 ${ink} ${dark ? 'text-[#d5ff55]' : 'text-[#1a5c3a]'}`}
+                        >
+                          {p.link.label} ↗
+                        </a>
+                      )}
+                    </div>
                     <div className="col-span-12 flex flex-wrap content-start gap-2 md:col-span-4">
                       {p.stack.map((tech) => (
                         <span

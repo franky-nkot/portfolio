@@ -1,4 +1,15 @@
-export const projects = [
+export interface Project {
+  no: string;
+  name: string;
+  metric: string;
+  color: string;
+  en: [string, string];
+  fr: [string, string];
+  stack: string[];
+  link?: { url: string; label: string };
+}
+
+export const projects: Project[] = [
   {
     no: '01',
     name: 'JobCopilot',
@@ -13,11 +24,12 @@ export const projects = [
       "emails envoyés automatiquement. 8 workers parallèles : scraping Guichet Emplois, enrichissement email, scoring IA via Mistral, envoi Gmail personnalisé, dashboard monitoring Iron Man HUD en temps réel sur port 8081.",
     ],
     stack: ['Python', 'Selenium', 'Mistral AI', 'Gmail API', 'BeautifulSoup'],
+    link: { url: 'https://github.com/franky-nkot/jobcopilot', label: 'GitHub' },
   },
   {
     no: '02',
     name: 'Akala AI',
-    metric: 'AI',
+    metric: 'v1',
     color: 'bg-[#ff694f]',
     en: [
       'CV adaptation engine',
@@ -59,4 +71,4 @@ export const projects = [
     ],
     stack: ['n8n', 'Groq', 'Llama 4 Scout', 'Telegram', 'Google Calendar'],
   },
-] as const;
+];

@@ -36,7 +36,9 @@ export const copy = {
     formSuccess: 'Message sent. I will reply within 24h.',
     formError: 'Something went wrong. Try again or email me directly.',
     stackTitle: 'Tech Stack',
-    certsTitle: 'Certifications',
+    certsTitle: 'CERTIFICATIONS & EDUCATION',
+    education: 'BSc Computer Science (L3)',
+    university: 'University of Yaoundé I — 2023–2026',
   },
   FR: {
     nav: ['PROJETS', 'COMPÉTENCES', 'MÉTHODE', 'CONTACT'],
@@ -75,7 +77,9 @@ export const copy = {
     formSuccess: 'Message envoyé. Je réponds sous 24h.',
     formError: "Une erreur est survenue. Réessayez ou contactez-moi directement.",
     stackTitle: 'Stack technique',
-    certsTitle: 'Certifications',
+    certsTitle: 'CERTIFICATIONS & FORMATION',
+    education: 'Licence Informatique (L3)',
+    university: 'Université de Yaoundé I — 2023–2026',
   },
 } as const;
 

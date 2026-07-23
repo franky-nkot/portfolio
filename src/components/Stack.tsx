@@ -64,10 +64,24 @@ export function StackSection() {
         ))}
       </div>
 
-      <div className="mt-20">
-        <h3 className={`mb-8 font-mono text-xs tracking-[.12em] ${dark ? 'text-[#d5ff55]' : 'text-[#1a5c3a]'}`}>
-          {t.certsTitle}
-        </h3>
+      <div id="certs" className={`mt-28 border-t pt-20 ${ink}`}>
+        <div className="mb-12 grid grid-cols-12 gap-6">
+          <p className={`col-span-12 font-mono text-[10px] tracking-[.16em] md:col-span-2 ${dark ? 'text-[#d5ff55]' : 'text-[#1a5c3a]'}`}>
+            02.5 / CREDENTIALS
+          </p>
+          <h2 className="col-span-12 font-display text-4xl font-bold leading-none tracking-[-.06em] md:col-span-7">
+            {t.certsTitle}
+          </h2>
+        </div>
+
+        <div className={`mb-12 rounded-lg border p-6 ${ink}`}>
+          <p className={`font-mono text-[10px] tracking-[.12em] ${dark ? 'text-[#d5ff55]' : 'text-[#1a5c3a]'}`}>
+            {lang === 'EN' ? 'DEGREE' : 'DIPLÔME'}
+          </p>
+          <p className="mt-3 font-display text-xl font-bold">{t.education}</p>
+          <p className={`mt-1 text-sm ${muted}`}>{t.university}</p>
+        </div>
+
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
           {certifications.map((cert) => (
             <div key={cert.title} className={`rounded-lg border p-5 ${ink}`}>
