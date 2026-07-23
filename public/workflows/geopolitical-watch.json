@@ -1,0 +1,100 @@
+{
+  "name": "Geopolitical Watch Agent",
+  "description": "Automated geopolitical news monitoring. Fetches BBC RSS, filters by keywords (Iran, war, Trump, China, Israel, conflict, gas, US), summarizes with LLM, sends to Telegram channel.",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            { "triggerAtHour": 6 },
+            { "triggerAtHour": 19 }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "name": "Schedule (6h + 19h)"
+    },
+    {
+      "parameters": {
+        "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "name": "BBC World RSS"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            { "leftValue": "={{ $json.title }}", "rightValue": "Iran", "operator": { "type": "string", "operation": "contains" } },
+            { "leftValue": "={{ $json.title }}", "rightValue": "war", "operator": { "type": "string", "operation": "contains" } },
+            { "leftValue": "={{ $json.title }}", "rightValue": "Trump", "operator": { "type": "string", "operation": "contains" } },
+            { "leftValue": "={{ $json.title }}", "rightValue": "China", "operator": { "type": "string", "operation": "contains" } },
+            { "leftValue": "={{ $json.title }}", "rightValue": "Israel", "operator": { "type": "string", "operation": "contains" } },
+            { "leftValue": "={{ $json.title }}", "rightValue": "conflict", "operator": { "type": "string", "operation": "contains" } },
+            { "leftValue": "={{ $json.title }}", "rightValue": "gas", "operator": { "type": "string", "operation": "contains" } },
+            { "leftValue": "={{ $json.title }}", "rightValue": "US", "operator": { "type": "string", "operation": "contains" } }
+          ],
+          "combinator": "or"
+        }
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "name": "Keyword Filter"
+    },
+    {
+      "parameters": {
+        "jsCode": "const articles = items.map(item => ({ titre: item.json.title, lien: item.json.link, contenu: item.json.contentSnippet }));\nconst prompt = `Summarize these news articles in French, concisely.\\n${articles.map(a => `- ${a.titre}: ${a.contenu} (${a.lien})`).join('\\n')}`;\nconst body = { model: 'llama-3.3-70b-versatile', max_tokens: 1024, temperature: 0.7, messages: [{ role: 'user', content: prompt }] };\nreturn [{ json: { body: JSON.stringify(body) } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "name": "Build LLM Prompt"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer $GROQ_API_KEY" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.body }}"
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "name": "Groq API (Llama 3.3)"
+    },
+    {
+      "parameters": {
+        "jsCode": "const content = items[0].json.choices[0].message.content;\nreturn [{ json: { message: content } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "name": "Extract Response"
+    },
+    {
+      "parameters": {
+        "chatId": "$TELEGRAM_CHANNEL_ID",
+        "text": "={{ $json.message }}"
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "name": "Send to Telegram"
+    }
+  ],
+  "connections": {
+    "Schedule (6h + 19h)": { "main": [[{ "node": "BBC World RSS", "type": "main", "index": 0 }]] },
+    "BBC World RSS": { "main": [[{ "node": "Keyword Filter", "type": "main", "index": 0 }]] },
+    "Keyword Filter": { "main": [[{ "node": "Build LLM Prompt", "type": "main", "index": 0 }]] },
+    "Build LLM Prompt": { "main": [[{ "node": "Groq API (Llama 3.3)", "type": "main", "index": 0 }]] },
+    "Groq API (Llama 3.3)": { "main": [[{ "node": "Extract Response", "type": "main", "index": 0 }]] },
+    "Extract Response": { "main": [[{ "node": "Send to Telegram", "type": "main", "index": 0 }]] }
+  }
+}

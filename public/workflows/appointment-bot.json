@@ -1,0 +1,127 @@
+{
+  "name": "Motema Bot - AI Appointment Agent",
+  "description": "Conversational Telegram bot for dental clinic appointment management. Features: booking, modification, cancellation, availability checking, email confirmations. Uses AI agent with memory and 6 tools.",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": ["message"]
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "name": "Telegram Trigger"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "You are the virtual assistant for a dental clinic. Handle appointment booking, modification, and cancellation via Google Calendar. Use tools to check availability, create/modify/delete events, and send confirmation emails.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.message.from.id }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "name": "Conversation Memory"
+    },
+    {
+      "parameters": {
+        "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "name": "Groq (Llama 4 Scout)"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Check available time slots in Google Calendar for a given date. Returns occupied slots.",
+        "operation": "getAll",
+        "calendar": { "__rl": true, "value": "$CALENDAR_ID", "mode": "id" }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "name": "check_availability"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Create a new appointment in Google Calendar. Requires: summary, description, start_time, end_time.",
+        "calendar": { "__rl": true, "value": "$CALENDAR_ID", "mode": "id" }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "name": "create_appointment"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Modify an existing appointment. Requires: event_id, new start/end times.",
+        "operation": "update",
+        "calendar": { "__rl": true, "value": "$CALENDAR_ID", "mode": "id" }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "name": "modify_appointment"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Cancel an appointment. Requires: event_id.",
+        "operation": "delete",
+        "calendar": { "__rl": true, "value": "$CALENDAR_ID", "mode": "id" }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "name": "cancel_appointment"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Search appointments by patient name or phone number.",
+        "operation": "getAll",
+        "calendar": { "__rl": true, "value": "$CALENDAR_ID", "mode": "id" }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "name": "search_appointments"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Send confirmation/modification/cancellation email to patient."
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
+      "name": "send_confirmation_email"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.chat_id }}",
+        "text": "={{ $json.cleaned_output }}"
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "name": "Send Reply"
+    }
+  ],
+  "connections": {
+    "Telegram Trigger": { "main": [[{ "node": "AI Agent", "type": "main", "index": 0 }]] },
+    "Conversation Memory": { "ai_memory": [[{ "node": "AI Agent", "type": "ai_memory", "index": 0 }]] },
+    "Groq (Llama 4 Scout)": { "ai_languageModel": [[{ "node": "AI Agent", "type": "ai_languageModel", "index": 0 }]] },
+    "AI Agent": { "main": [[{ "node": "Send Reply", "type": "main", "index": 0 }]] },
+    "check_availability": { "ai_tool": [[{ "node": "AI Agent", "type": "ai_tool", "index": 0 }]] },
+    "create_appointment": { "ai_tool": [[{ "node": "AI Agent", "type": "ai_tool", "index": 0 }]] },
+    "modify_appointment": { "ai_tool": [[{ "node": "AI Agent", "type": "ai_tool", "index": 0 }]] },
+    "cancel_appointment": { "ai_tool": [[{ "node": "AI Agent", "type": "ai_tool", "index": 0 }]] },
+    "search_appointments": { "ai_tool": [[{ "node": "AI Agent", "type": "ai_tool", "index": 0 }]] },
+    "send_confirmation_email": { "ai_tool": [[{ "node": "AI Agent", "type": "ai_tool", "index": 0 }]] }
+  }
+}

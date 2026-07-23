@@ -1,0 +1,58 @@
+{
+  "name": "Email Classification Agent",
+  "description": "Classifies incoming emails and drafts contextual replies using LLM. Categories: setup, security, pricing, escalation, hr, spam.",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Classify this email and draft a reply based on documentation.\n\nReturn JSON: {\"category\": \"...\", \"draft_reply\": \"...\"}\n\nFrom: {{ $json.body.from }}\nSubject: {{ $json.body.subject }}\nBody: {{ $json.body }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "name": "LLM Chain"
+    },
+    {
+      "parameters": {
+        "model": "mistral-large-latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "name": "Mistral Large"
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = $input.item.json.text;\nconst cleaned = text.replace(/```json\\n?/gi, '').replace(/```\\n?/g, '').trim();\nlet parsed;\ntry {\n  parsed = JSON.parse(cleaned);\n} catch(e) {\n  const categoryMatch = cleaned.match(/\"category\"\\s*:\\s*\"([^\"]+)\"/);\n  const replyMatch = cleaned.match(/\"draft_reply\"\\s*:\\s*\"([\\s\\S]+?)\"\\s*\\}/);\n  parsed = {\n    category: categoryMatch ? categoryMatch[1] : 'unknown',\n    draft_reply: replyMatch ? replyMatch[1] : 'Thank you for your message.'\n  };\n}\nreturn { json: parsed };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "name": "Parse JSON Response"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "email-classifier",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "name": "Webhook Trigger"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": { "responseCode": 200 }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "name": "Respond"
+    }
+  ],
+  "connections": {
+    "Mistral Large": { "ai_languageModel": [[{ "node": "LLM Chain", "type": "ai_languageModel", "index": 0 }]] },
+    "LLM Chain": { "main": [[{ "node": "Parse JSON Response", "type": "main", "index": 0 }]] },
+    "Parse JSON Response": { "main": [[{ "node": "Respond", "type": "main", "index": 0 }]] },
+    "Webhook Trigger": { "main": [[{ "node": "LLM Chain", "type": "main", "index": 0 }]] }
+  }
+}
