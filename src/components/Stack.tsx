@@ -68,7 +68,7 @@ export function StackSection() {
         <h3 className={`mb-8 font-mono text-xs tracking-[.12em] ${dark ? 'text-[#d5ff55]' : 'text-[#1a5c3a]'}`}>
           {t.certsTitle}
         </h3>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-5">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
           {certifications.map((cert) => (
             <div key={cert.title} className={`rounded-lg border p-5 ${ink}`}>
               <div className={`mb-4 font-mono text-[10px] ${dark ? 'text-[#d5ff55]' : 'text-[#1a5c3a]'}`}>

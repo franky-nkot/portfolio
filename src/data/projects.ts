@@ -2,15 +2,15 @@ export const projects = [
   {
     no: '01',
     name: 'JobCopilot',
-    metric: '335+',
+    metric: '515+',
     color: 'bg-[#d5ff55]',
     en: [
       'Outbound intelligence system',
-      'applications delivered automatically. 8 parallel workers: scraping Guichet Emplois, email enrichment, AI scoring via Mistral, personalized Gmail sending, real-time Iron Man HUD monitoring dashboard on port 8081.',
+      'emails sent automatically. 8 parallel workers: scraping Guichet Emplois, email enrichment, AI scoring via Mistral, personalized Gmail sending, real-time Iron Man HUD monitoring dashboard on port 8081.',
     ],
     fr: [
       "Système d'intelligence outbound",
-      "candidatures envoyées automatiquement. 8 workers parallèles : scraping Guichet Emplois, enrichissement email, scoring IA via Mistral, envoi Gmail personnalisé, dashboard monitoring Iron Man HUD en temps réel sur port 8081.",
+      "emails envoyés automatiquement. 8 workers parallèles : scraping Guichet Emplois, enrichissement email, scoring IA via Mistral, envoi Gmail personnalisé, dashboard monitoring Iron Man HUD en temps réel sur port 8081.",
     ],
     stack: ['Python', 'Selenium', 'Mistral AI', 'Gmail API', 'BeautifulSoup'],
   },
@@ -36,11 +36,11 @@ export const projects = [
     color: 'bg-[#78a7ff]',
     en: [
       'Reporting nervous system',
-      'of reporting time removed. 18-node n8n workflow: multi-source collection, LLM classification via Groq, automatic Telegram alerts, Google Sheets dashboard. Cost: €0.002 per execution.',
+      'of reporting time removed. 18-node n8n workflow: multi-source collection, LLM classification via Groq (scored 4.40/5 at n8n Community Challenge), automatic Telegram alerts, Google Sheets dashboard. Cost: €0.002 per execution.',
     ],
     fr: [
       'Système nerveux du reporting',
-      "du temps de reporting supprimé. Workflow n8n de 18 nœuds : collecte multi-sources, classification LLM via Groq, alertes Telegram automatiques, dashboard Google Sheets. Coût : 0,002€ par exécution.",
+      "du temps de reporting supprimé. Workflow n8n de 18 nœuds : collecte multi-sources, classification LLM via Groq (score officiel 4,40/5 au n8n Community Challenge), alertes Telegram automatiques, dashboard Google Sheets. Coût : 0,002€ par exécution.",
     ],
     stack: ['n8n', 'Groq', 'Llama 3.3', 'Google Sheets', 'Telegram'],
   },
