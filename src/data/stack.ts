@@ -63,25 +63,26 @@ export const stack: StackCategory[] = [
 ];
 
 export interface Certification {
-  title: string;
+  en: string;
+  fr: string;
   issuer: string;
   date: string;
 }
 
 export const certifications: Certification[] = [
-  { title: 'IA conversationnelle sécurisée avec des garde-fous', issuer: 'AWS SimuLearn', date: 'Jul 2026' },
-  { title: 'Premiers pas dans le cloud', issuer: 'AWS SimuLearn', date: 'Jul 2026' },
-  { title: 'Les fondamentaux du cloud', issuer: 'AWS SimuLearn', date: 'Jul 2026' },
-  { title: 'Explorer l\'Amazon Bedrock Playgrounds', issuer: 'AWS SimuLearn', date: 'Jul 2026' },
-  { title: 'Générer du code pour une page Web', issuer: 'AWS SimuLearn', date: 'Jul 2026' },
-  { title: 'Claude Code 101', issuer: 'Anthropic Academy', date: 'Jul 2026' },
-  { title: 'AI Fluency for Educators', issuer: 'Anthropic Academy', date: 'Jun 2026' },
-  { title: 'AI Fluency: Framework & Foundations', issuer: 'Anthropic Academy', date: 'May 2026' },
-  { title: 'Claude 101', issuer: 'Anthropic Academy', date: 'Mar 2026' },
-  { title: 'Build Agents ADK', issuer: 'Google Cloud', date: '2026' },
-  { title: 'MLOps for Generative AI', issuer: 'Google Cloud', date: '2026' },
-  { title: 'Prompt Engineering', issuer: 'Google Cloud', date: '2026' },
-  { title: 'Intro to Generative AI', issuer: 'Google Cloud', date: '2026' },
-  { title: 'MOOC Orange no-code (10/10)', issuer: 'Orange Digital Center', date: 'Jun 2026' },
-  { title: 'FutureWorks, Délégué virtuel', issuer: 'World Bank Youth Summit', date: '2026' },
+  { en: 'Secure Conversational AI with Guardrails', fr: 'IA conversationnelle sécurisée avec des garde-fous', issuer: 'AWS SimuLearn', date: 'Jul 2026' },
+  { en: 'First Steps in the Cloud', fr: 'Premiers pas dans le cloud', issuer: 'AWS SimuLearn', date: 'Jul 2026' },
+  { en: 'Cloud Fundamentals', fr: 'Les fondamentaux du cloud', issuer: 'AWS SimuLearn', date: 'Jul 2026' },
+  { en: 'Exploring Amazon Bedrock Playgrounds', fr: 'Explorer l\'Amazon Bedrock Playgrounds', issuer: 'AWS SimuLearn', date: 'Jul 2026' },
+  { en: 'Generate Code for a Web Page', fr: 'Générer du code pour une page Web', issuer: 'AWS SimuLearn', date: 'Jul 2026' },
+  { en: 'Claude Code 101', fr: 'Claude Code 101', issuer: 'Anthropic Academy', date: 'Jul 2026' },
+  { en: 'AI Fluency for Educators', fr: 'AI Fluency for Educators', issuer: 'Anthropic Academy', date: 'Jun 2026' },
+  { en: 'AI Fluency: Framework & Foundations', fr: 'AI Fluency: Framework & Foundations', issuer: 'Anthropic Academy', date: 'May 2026' },
+  { en: 'Claude 101', fr: 'Claude 101', issuer: 'Anthropic Academy', date: 'Mar 2026' },
+  { en: 'Build Agents ADK', fr: 'Build Agents ADK', issuer: 'Google Cloud', date: '2026' },
+  { en: 'MLOps for Generative AI', fr: 'MLOps pour l\'IA générative', issuer: 'Google Cloud', date: '2026' },
+  { en: 'Prompt Engineering', fr: 'Prompt Engineering', issuer: 'Google Cloud', date: '2026' },
+  { en: 'Intro to Generative AI', fr: 'Introduction à l\'IA générative', issuer: 'Google Cloud', date: '2026' },
+  { en: 'MOOC Orange no-code (10/10)', fr: 'MOOC Orange no-code (10/10)', issuer: 'Orange Digital Center', date: 'Jun 2026' },
+  { en: 'FutureWorks, Virtual Delegate', fr: 'FutureWorks, Délégué virtuel', issuer: 'World Bank Youth Summit', date: '2026' },
 ];

@@ -84,11 +84,11 @@ export function StackSection() {
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
           {certifications.map((cert) => (
-            <div key={cert.title} className={`rounded-lg border p-5 ${ink}`}>
+            <div key={cert.en} className={`rounded-lg border p-5 ${ink}`}>
               <div className={`mb-4 font-mono text-[10px] ${dark ? 'text-[#d5ff55]' : 'text-[#1a5c3a]'}`}>
                 {cert.issuer}
               </div>
-              <p className="text-sm font-medium leading-5">{cert.title}</p>
+              <p className="text-sm font-medium leading-5">{lang === 'EN' ? cert.en : cert.fr}</p>
               <p className={`mt-2 font-mono text-[10px] ${muted}`}>{cert.date}</p>
             </div>
           ))}
