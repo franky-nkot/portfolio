@@ -31,8 +31,8 @@ export const copy = {
     footer: 'BUILT WITHOUT NOISE',
     stackTitle: 'Tech Stack',
     certsTitle: 'CERTIFICATIONS & EDUCATION',
-    education: 'BSc Computer Science (L3)',
-    university: 'University of Yaoundé I — 2023–2026',
+    education: 'BSc Computer Science',
+    university: 'University of Yaoundé I — Graduated 2026',
   },
   FR: {
     nav: ['PROJETS', 'COMPÉTENCES', 'MÉTHODE', 'CONTACT'],
@@ -66,8 +66,8 @@ export const copy = {
     footer: 'CONÇU SANS BRUIT',
     stackTitle: 'Stack technique',
     certsTitle: 'CERTIFICATIONS & FORMATION',
-    education: 'Licence Informatique (L3)',
-    university: 'Université de Yaoundé I — 2023–2026',
+    education: 'Licence Informatique',
+    university: 'Université de Yaoundé I — Diplômé 2026',
   },
 } as const;
 
