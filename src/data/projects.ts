@@ -106,4 +106,20 @@ export const projects: Project[] = [
     stack: ['n8n', 'Groq', 'Llama 3.3', 'BBC RSS', 'Telegram'],
     link: { url: 'https://github.com/franky-nkot/n8n-workflows', label: 'GitHub' },
   },
+  {
+    no: '07',
+    name: 'Le Gourmet Bot',
+    metric: '4 workflows',
+    color: 'bg-[#d5ff55]',
+    en: [
+      'AI restaurant assistant on Telegram',
+      'workflows orchestrated. Full-stack Telegram bot for a Cameroonian restaurant: RAG-powered menu search via pgvector + Mistral embeddings, order management with secure 2-step cancellation (secret code + 10min window), real-time staff notifications, slash commands for order status, and auto-sync of menu embeddings on changes.',
+    ],
+    fr: [
+      'Assistant IA restaurant sur Telegram',
+      "workflows orchestrés. Bot Telegram complet pour un restaurant camerounais : recherche menu par RAG via pgvector + embeddings Mistral, gestion de commandes avec annulation sécurisée en 2 étapes (code secret + fenêtre 10 min), notifications staff en temps réel, commandes slash pour le statut, et synchronisation auto des embeddings à chaque modification du menu.",
+    ],
+    stack: ['n8n', 'Groq', 'Llama 3.3', 'Supabase pgvector', 'Mistral Embed', 'Telegram'],
+    link: { url: 'https://github.com/franky-nkot/n8n-workflows', label: 'GitHub' },
+  },
 ];
