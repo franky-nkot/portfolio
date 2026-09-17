@@ -64,35 +64,45 @@ export function StackSection() {
         ))}
       </div>
 
-      <div id="certs" className={`mt-28 border-t pt-20 ${ink}`}>
-        <div className="mb-12 grid grid-cols-12 gap-6">
-          <p className={`col-span-12 font-mono text-[10px] tracking-[.16em] md:col-span-2 ${dark ? 'text-[#d5ff55]' : 'text-[#1a5c3a]'}`}>
-            02.5 / CREDENTIALS
-          </p>
-          <h2 className="col-span-12 font-display text-4xl font-bold leading-none tracking-[-.06em] md:col-span-7">
-            {t.certsTitle}
-          </h2>
-        </div>
+    </section>
+  );
+}
 
-        <div className={`mb-12 rounded-lg border p-6 ${ink}`}>
-          <p className={`font-mono text-[10px] tracking-[.12em] ${dark ? 'text-[#d5ff55]' : 'text-[#1a5c3a]'}`}>
-            {lang === 'EN' ? 'DEGREE' : 'DIPLÔME'}
-          </p>
-          <p className="mt-3 font-display text-xl font-bold">{t.education}</p>
-          <p className={`mt-1 text-sm ${muted}`}>{t.university}</p>
-        </div>
+export function CertsSection() {
+  const { dark, lang } = useTheme();
+  const t = copy[lang];
+  const muted = dark ? 'text-[#b9c0b4]' : 'text-[#5e675f]';
+  const ink = dark ? 'border-[#f5f0e8]/20' : 'border-[#18201b]/20';
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
-          {certifications.map((cert) => (
-            <div key={cert.en} className={`rounded-lg border p-5 ${ink}`}>
-              <div className={`mb-4 font-mono text-[10px] ${dark ? 'text-[#d5ff55]' : 'text-[#1a5c3a]'}`}>
-                {cert.issuer}
-              </div>
-              <p className="text-sm font-medium leading-5">{lang === 'EN' ? cert.en : cert.fr}</p>
-              <p className={`mt-2 font-mono text-[10px] ${muted}`}>{cert.date}</p>
+  return (
+    <section id="certs" className={`border-b py-28 ${ink}`}>
+      <div className="mb-12 grid grid-cols-12 gap-6">
+        <p className={`col-span-12 font-mono text-[10px] tracking-[.16em] md:col-span-2 ${dark ? 'text-[#d5ff55]' : 'text-[#1a5c3a]'}`}>
+          02.5 / CREDENTIALS
+        </p>
+        <h2 className="col-span-12 font-display text-4xl font-bold leading-none tracking-[-.06em] md:col-span-7">
+          {t.certsTitle}
+        </h2>
+      </div>
+
+      <div className={`mb-12 rounded-lg border p-6 ${ink}`}>
+        <p className={`font-mono text-[10px] tracking-[.12em] ${dark ? 'text-[#d5ff55]' : 'text-[#1a5c3a]'}`}>
+          {lang === 'EN' ? 'DEGREE' : 'DIPLÔME'}
+        </p>
+        <p className="mt-3 font-display text-xl font-bold">{t.education}</p>
+        <p className={`mt-1 text-sm ${muted}`}>{t.university}</p>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+        {certifications.map((cert) => (
+          <div key={cert.en} className={`rounded-lg border p-5 ${ink}`}>
+            <div className={`mb-4 font-mono text-[10px] ${dark ? 'text-[#d5ff55]' : 'text-[#1a5c3a]'}`}>
+              {cert.issuer}
             </div>
-          ))}
-        </div>
+            <p className="text-sm font-medium leading-5">{lang === 'EN' ? cert.en : cert.fr}</p>
+            <p className={`mt-2 font-mono text-[10px] ${muted}`}>{cert.date}</p>
+          </div>
+        ))}
       </div>
     </section>
   );

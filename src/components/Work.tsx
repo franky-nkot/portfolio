@@ -32,19 +32,19 @@ export function Work() {
           <article key={p.name} className={`group border-b ${ink}`}>
             <button
               onClick={() => setOpen(open === i ? null : i)}
-              className="grid w-full grid-cols-12 items-center gap-6 py-7 text-left"
+              className="grid w-full grid-cols-12 items-center gap-x-3 gap-y-0 py-7 text-left md:gap-6"
             >
-              <span className={`col-span-1 font-mono text-xs ${muted}`}>{p.no}</span>
-              <span className="col-span-4 font-display text-2xl font-bold tracking-[-.055em] group-hover:italic md:text-4xl">
+              <span className={`col-span-2 font-mono text-xs md:col-span-1 ${muted}`}>{p.no}</span>
+              <span className="col-span-6 font-display text-lg font-bold tracking-[-.055em] group-hover:italic md:col-span-4 md:text-4xl">
                 {p.name}
               </span>
               <span className={`col-span-3 hidden text-sm md:block ${muted}`}>
                 {p[langKey][0]}
               </span>
-              <span className="col-span-5 font-mono text-3xl tracking-[-.08em] md:col-span-3 md:text-4xl">
+              <span className="col-span-3 font-mono text-lg tracking-[-.08em] md:col-span-3 md:text-4xl">
                 {p.metric}
               </span>
-              <span className="col-span-2 text-right font-mono text-lg md:col-span-1">
+              <span className="col-span-1 text-right font-mono text-lg md:col-span-1">
                 {open === i ? '−' : '+'}
               </span>
             </button>
